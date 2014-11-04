@@ -1,0 +1,117 @@
+Version0.1
+==========
+using UnityEngine;
+using System.Collections;
+
+public class PlayerMovement : MonoBehaviour 
+{
+
+
+	public float playerHp;
+	public float moveSpeed;
+	public GameObject target;
+	public float bounceSpd;
+	//public bool doesBounce = false;
+	public Vector3 tempVec;
+	public float tempX;
+	public float tempY;
+	public float tempZ;
+	public GlobalGameLogic gameLogic;
+	// Use this for initialization
+	void Start () 
+	{
+	
+	}
+
+	void OnTriggerEnter (Collider other)
+	{
+		if(other.tag == "Enemy")
+		{
+			gameObject.SetActive(false);
+			playerHp -= 1;
+
+			tempVec.Set (transform.position.x + (tempX), transform.position.y + (tempY),transform.position.z + (tempZ));
+			transform.position = tempVec;
+			gameLogic.GameOver ();
+		}
+		if(other.tag == "Wall")
+		{
+			gameObject.SetActive(false);
+			playerHp -= 1;
+			
+			tempVec.Set (transform.position.x + (tempX), transform.position.y + (tempY),transform.position.z + (tempZ));
+			transform.position = tempVec;
+			gameLogic.GameOver ();
+		}
+
+	}
+
+//	void OnTriggerStay (Collider other)
+//	{
+//		doesBounce = true;
+//
+//		if (doesBounce == true)
+//		{
+//			rigidbody.AddForce(Vector3.up * bounceSpd,ForceMode.Impulse);
+//			doesBounce = false;
+//		}
+//
+//		else if (doesBounce == false)
+//		{
+//			rigidbody.AddForce(Vector3.up * 0,ForceMode.Impulse);
+//		}
+//	}
+
+	
+	// Update is called once per frame
+	void Update ()	
+	{	
+
+
+		if (playerHp == 0)
+		{
+			Destroy (gameObject);
+		}
+
+
+//		tempX = 0;
+//		tempY = 0;
+//		tempZ = 0;
+//
+//		Vector3 temp = target.transform.position;
+//		temp.z = 0;
+//
+//
+//		Vector3 relativePos = temp - transform.position;
+//		relativePos.Normalize();
+//		Quaternion rotation = Quaternion.FromToRotation (Vector3.up, relativePos);
+//		                                              
+//		transform.rotation = rotation;
+
+
+		if(Input.GetKey(KeyCode.W))
+		{
+			tempY = - bounceSpd;
+			//transform.Translate(Vector3.up*Time.deltaTime, Space.World);
+			transform.position = transform.position + Vector3.up*moveSpeed*Time.deltaTime;
+		}
+		if(Input.GetKey(KeyCode.A))
+		{
+			tempX = bounceSpd;
+			//transform.Translate(Vector3.left*Time.deltaTime, Space.World);
+			transform.position = transform.position + Vector3.left*moveSpeed*Time.deltaTime;
+		}
+		if(Input.GetKey(KeyCode.S))
+		{
+			tempY = bounceSpd;
+			//transform.Translate(Vector3.down*Time.deltaTime, Space.World);
+			transform.position = transform.position + Vector3.down*moveSpeed*Time.deltaTime;
+		}
+		if(Input.GetKey(KeyCode.D))
+		{
+			tempX = - bounceSpd;
+			//transform.Translate(Vector3.right*Time.deltaTime, Space.World);
+			transform.position = transform.position + Vector3.right*moveSpeed*Time.deltaTime;
+		}
+	}
+}
