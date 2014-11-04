@@ -1,5 +1,3 @@
-Version0.1
-==========
 using UnityEngine;
 using System.Collections;
 
@@ -46,7 +44,21 @@ public class PlayerMovement : MonoBehaviour
 
 	}
 
-
+//	void OnTriggerStay (Collider other)
+//	{
+//		doesBounce = true;
+//
+//		if (doesBounce == true)
+//		{
+//			rigidbody.AddForce(Vector3.up * bounceSpd,ForceMode.Impulse);
+//			doesBounce = false;
+//		}
+//
+//		else if (doesBounce == false)
+//		{
+//			rigidbody.AddForce(Vector3.up * 0,ForceMode.Impulse);
+//		}
+//	}
 
 	
 	// Update is called once per frame
@@ -60,7 +72,19 @@ public class PlayerMovement : MonoBehaviour
 		}
 
 
-
+//		tempX = 0;
+//		tempY = 0;
+//		tempZ = 0;
+//
+//		Vector3 temp = target.transform.position;
+//		temp.z = 0;
+//
+//
+//		Vector3 relativePos = temp - transform.position;
+//		relativePos.Normalize();
+//		Quaternion rotation = Quaternion.FromToRotation (Vector3.up, relativePos);
+//		                                              
+//		transform.rotation = rotation;
 
 
 		if(Input.GetKey(KeyCode.W))
